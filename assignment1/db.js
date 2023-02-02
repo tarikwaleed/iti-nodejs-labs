@@ -11,10 +11,12 @@ function getNextId() {
 }
 function initializeDBFile() {
   // initialize the file with an empty array
-  writeFileSync(DB_PATH, JSON.stringify([]));
+  // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
+  writeFileSync(DB_PATH, JSON.stringify([], null, 2));
 }
 function initializeMetaDataFile() {
-  writeFileSync(METADATA_PATH, JSON.stringify({ todo_count: 0 }));
+  // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
+  writeFileSync(METADATA_PATH, JSON.stringify({ todo_count: 0 }, null, 2));
 }
 
 function addTodo(todo) {
@@ -26,12 +28,14 @@ function addTodo(todo) {
   fileContentAsJSON.push(todo);
   //Write
   try {
-    writeFileSync(DB_PATH, JSON.stringify(fileContentAsJSON));
+    // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
+    writeFileSync(DB_PATH, JSON.stringify(fileContentAsJSON, null, 2));
     var metadata = readFileSync(METADATA_PATH);
     var json = JSON.parse(metadata);
     json.todo_count += 1;
     try {
-      writeFileSync(METADATA_PATH, JSON.stringify(json));
+      // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
+      writeFileSync(METADATA_PATH, JSON.stringify(json, null, 2));
     } catch (error) {
       console.log("ERROR, not appended");
     }
@@ -39,17 +43,10 @@ function addTodo(todo) {
     console.log("ERROR, not appended");
   }
 }
-// var todo = {
-//   id: getNextId(),
-//   title: "first todo",
-//   content: "this is my very todo in the app",
-//   checked: true,
-// };
 
 // Both will just run once
 // initializeMetaDataFile();
 // initializeDBFile();
-// addTodo(todo)
 var args = process.argv;
 var operation = args[2];
 switch (operation) {

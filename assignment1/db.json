@@ -23,7 +23,28 @@
     "content": "this is my very todo in the app",
     "checked": true
   },
-  { "id": 5, "title": "new titile", "content": "new body", "checked": true },
-  { "id": 6, "title": "gym", "content": "go to the gym", "checked": true },
-  { "id": 7, "title": "gym", "content": "go to the gym", "checked": true }
+  {
+    "id": 5,
+    "title": "new titile",
+    "content": "new body",
+    "checked": true
+  },
+  {
+    "id": 6,
+    "title": "gym",
+    "content": "go to the gym",
+    "checked": true
+  },
+  {
+    "id": 7,
+    "title": "gym",
+    "content": "go to the gym",
+    "checked": true
+  },
+  {
+    "id": 8,
+    "title": "gym",
+    "content": "go to the gym",
+    "checked": true
+  }
 ]
