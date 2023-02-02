@@ -16,5 +16,7 @@
     "url": "https://github.com/tarikwaleed/iti-nodejs-labs/issues"
   },
   "homepage": "https://github.com/tarikwaleed/iti-nodejs-labs#readme",
-  "type": "module"
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
