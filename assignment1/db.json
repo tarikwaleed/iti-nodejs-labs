@@ -1,6 +1,29 @@
-{
-  "id": 1,
-  "title": "first todo",
-  "content": "this is my very todo in the app",
-  "checked": true
-}
+[
+  {
+    "id": 1,
+    "title": "first todo",
+    "content": "this is my very todo in the app",
+    "checked": true
+  },
+  {
+    "id": 2,
+    "title": "first todo",
+    "content": "this is my very todo in the app",
+    "checked": true
+  },
+  {
+    "id": 3,
+    "title": "first todo",
+    "content": "this is my very todo in the app",
+    "checked": true
+  },
+  {
+    "id": 4,
+    "title": "first todo",
+    "content": "this is my very todo in the app",
+    "checked": true
+  },
+  { "id": 5, "title": "new titile", "content": "new body", "checked": true },
+  { "id": 6, "title": "gym", "content": "go to the gym", "checked": true },
+  { "id": 7, "title": "gym", "content": "go to the gym", "checked": true }
+]
