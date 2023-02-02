@@ -1,26 +1,14 @@
 [
   {
     "id": 1,
-    "title": "not important",
-    "content": "not important too",
-    "checked": true
+    "title": "hello",
+    "content": "added from psotman",
+    "checked": false
   },
   {
     "id": 2,
-    "title": "not important",
-    "content": "html project",
-    "checked": false
-  },
-  {
-    "id": 3,
-    "title": "important",
-    "content": "css project",
-    "checked": false
-  },
-  {
-    "id": 4,
-    "title": "important",
-    "content": "bootstrap project",
+    "title": "edited from postman",
+    "content": "also edited from postman",
     "checked": false
   }
 ]
