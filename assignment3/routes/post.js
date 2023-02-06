@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
   Post.find({}, (err, posts) => {
     if (!err) return res.json(posts)
     return handleError(err)
-  }).populate("author")
+  }).populate({path:'author'})
 })
 router.get("/:id", (req, res, next) => {
   Post.find({ _id: req.params.id }, (err, posts) => {
