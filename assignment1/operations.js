@@ -40,7 +40,7 @@ async function toggleTodo(id) {
 }
 async function showTodos(option) {
   // var json = readDBFile()
-  const json = await promisifiedReadDBFile()
+  const json = await helpers.readDBFile()
   var result
   switch (option) {
     case "checked":
