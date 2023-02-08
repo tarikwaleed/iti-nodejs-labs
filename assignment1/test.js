@@ -12,8 +12,8 @@ async function constructTodo() {
   return todo
 }
 // helpers.init()
-// constructTodo().then((todo) => {
-//   operations.addTodo(todo)
-// })
-operations.removeTodo(1)
+constructTodo().then((todo) => {
+  operations.addTodo(todo)
+})
+operations.toggleTodo(5)
 

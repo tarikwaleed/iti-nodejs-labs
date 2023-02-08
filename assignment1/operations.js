@@ -33,10 +33,10 @@ async function removeTodo(id) {
   }
 }
 async function toggleTodo(id) {
-  // var json = readDBFile()
-  const json = await promisifiedReadDBFile()
-  json.filter((e) => e.id == id).map((e) => (e.checked = !e.checked))
-  storeToDB(json)
+  const dbJson = await helpers.readDBFile()
+  dbJson.filter((e) => e.id == id).map((e) => (e.checked = !e.checked))
+  helpers.storeToDbFile(dbJson)
+  console.log(`Todo ${id} Toggled`)
 }
 async function showTodos(option) {
   // var json = readDBFile()
