@@ -1,3 +1,4 @@
+const { rejects } = require("assert")
 const fs = require("fs")
 const METADATA_PATH =
   "/media/tarikwaleed/Data/iti/NODEJS/iti-nodejs-labs/assignment1/metadata.json"
@@ -8,16 +9,33 @@ function getNextId() {
   return getCurrentId() + 1
 }
 function getCurrentId() {
-  var json = readMetaDataFile()
+  const json = readMetaDataFile()
+  // console.log(JSON.parse(json));
   return parseInt(json.todo_count)
 }
 function readMetaDataFile() {
   var metadata = fs.readFileSync(METADATA_PATH)
   return JSON.parse(metadata)
 }
+function promisifiedReadMetaDataFile() {
+  return new Promise((resolve, reject) => {
+    fs.readFile(METADATA_PATH, (err, rawData) => {
+      if (!err) resolve(rawData)
+      else reject(err)
+    })
+  })
+}
 function readDBFile() {
   var data = fs.readFileSync(DB_PATH)
   return JSON.parse(data)
+}
+function promisifiedReadDBFile() {
+  return new Promise((resolve, reject) => {
+    fs.readFile(DB_PATH, (err, rawData) => {
+      if (!err) resolve(rawData)
+      else reject(err)
+    })
+  })
 }
 function initializeDBFile() {
   // initialize the file with an empty array
@@ -35,8 +53,25 @@ function init() {
 function storeToDB(data) {
   fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2))
 }
+const promisifiedStoreToDb = (data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(DB_PATH, JSON.stringify(data, null, 2), (err) => {
+      if (!err) resolve()
+      else reject(err)
+    })
+  })
+}
+
 function storeToMeta(data) {
   fs.writeFileSync(METADATA_PATH, JSON.stringify(data, null, 2))
+}
+const promisifiedStoreToMeta = (data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(METADATA_PATH, JSON.stringify(data, null, 2), (err) => {
+      if (!err) resolve()
+      else reject(err)
+    })
+  })
 }
 function reAssignIds() {
   var i = 0
@@ -52,9 +87,10 @@ function prepareData(data) {
   }, {})
 }
 
-function addTodo(todo) {
+async function addTodo(todo) {
   //Read
-  var fileContent = fs.readFileSync(DB_PATH)
+  // var fileContent = fs.readFileSync(DB_PATH)
+  const fileContent = await promisifiedReadDBFile()
   //Parse
   var fileContentAsJSON = JSON.parse(fileContent)
   //Push
@@ -62,12 +98,19 @@ function addTodo(todo) {
   //Write
   try {
     // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
-    fs.writeFileSync(DB_PATH, JSON.stringify(fileContentAsJSON, null, 2))
+    // fs.writeFileSync(DB_PATH, JSON.stringify(fileContentAsJSON, null, 2))
+    // promisifiedStoreToDb(fileContentAsJSON).catch((err) => {
+    //   console.log(err)
+    // })
+    await promisifiedStoreToDb(fileContentAsJSON)
     var json = readMetaDataFile()
     json.todo_count += 1
     try {
       // passing those two extra parameters to stringify, makes it write the json PrettyPrinted
-      fs.writeFileSync(METADATA_PATH, JSON.stringify(json, null, 2))
+      // fs.writeFileSync(METADATA_PATH, JSON.stringify(json, null, 2))
+      promisifiedStoreToMeta(json).catch((err) => {
+        console.log(err)
+      })
       console.log("Todo added")
       reAssignIds()
     } catch (error) {
@@ -169,6 +212,8 @@ function main() {
 main()
 
 module.exports = {
+  readDBFile,
+  readMetaDataFile,
   addTodo,
   removeTodo,
   editTodo,
@@ -176,3 +221,7 @@ module.exports = {
   listTodos,
   getNextId,
 }
+
+//the goal of assignment5 is to use readFile and writeFilec
+//instead of readFileSync and writeFileSync
+// and to use them as promises instead of giving them callbacks
